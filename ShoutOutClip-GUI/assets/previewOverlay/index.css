@@ -1,0 +1,101 @@
+#preview {
+  margin-top: 1rem;
+  margin-bottom: 1rem !important;
+  max-width: 90%;
+  margin: 0 auto;
+  height: auto;
+}
+
+#textZone {
+  box-shadow: #1b1c1d 0 0 5px;
+  z-index: 1;
+  margin: 0;
+  padding: 0;
+  margin-left: -2rem;
+  margin-right: -2rem;
+  border-radius: 5px;
+}
+
+#streamerInfo,
+#channelInfo {
+  padding: 0.8rem 3.5rem;
+  font-size: 2rem;
+  /* font-family: 'Sansation'; */
+  line-height: 150%;
+  word-break: keep-all !important;
+  text-align: left;
+}
+
+#streamerInfo {
+  background-color: #16b2ab;
+  color: #ffffff;
+  border-radius: 5px 5px  0 0;
+  height: auto;
+}
+
+#channelInfo {
+    border-radius: 0 0 5px 5px;
+    background-color: #ffffff;
+    color: #1b1c1d;
+    font-size: 1.5rem
+}
+
+#profileZone,
+#gameZone {
+  box-shadow: 0px 0px 5px #1b1c1d;
+  border-radius: 5px;
+  padding: 10px;
+  z-index: 2;
+  background-color: #1b1c1d;
+  background-color: transparent;
+}
+
+#profileZone img,
+#gameZone img {
+  height: auto;
+  margin: auto
+}
+
+#clipZone {
+  margin-top: -2rem;
+  padding: 0rem !important;
+  display: grid;
+  height: fit-content;
+  align-content: start;
+  max-width: 85%;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px;
+  border: solid 3px #16b2ab;
+  z-index: 0;
+}
+
+#clipZone video {
+  width: 100%;
+  align-self: start;
+  border-radius: 3px 3px 0 0;
+}
+
+#overlay {
+  width: 100%;
+  z-index: 0;
+  font-size: 1.5rem;
+  background-color: rgba(27, 28, 29);
+  color: white;
+  justify-self: center;
+  padding: 1rem;
+  font-family: 'Sansation';
+  border-radius: 0 0 3px 3px;
+  border-top: solid 2px #16b2ab;
+  height: fit-content;
+  align-self: end;
+  line-height: 2rem;
+}
+
+
+input[type='color'] {
+  height: 38px;
+}
+
+.spaced {
+  padding-top: 0.5rem;
+}

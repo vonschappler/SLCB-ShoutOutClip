@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>[SLCB] ShoutOutClip Overlay</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+    />
+    <link rel="stylesheet" href="./shoutout.css" type="text/css" />
+  </head>
+  <body style="padding-top: 1.5em; margin: 0 auto; max-width: 50%">
+    <div id="shoutOut" class="ui grid transition hidden">
+      <div class="equal height row centered">
+        <div
+          id="profileZone"
+          class="two wide column transition middle aligned floating message"
+        >
+          <img id="profileImg" src="" alt="" class="ui small rounded image" />
+        </div>
+        <div id="textZone" class="twelve wide column transition middle aligned">
+          <div id="streamerInfo">Check out streamer (last paying Game)</div>
+          <div id="channelInfo">at http://twitch.tv/streamer</div>
+        </div>
+        <div id="gameZone" class="two wide column transition middle aligned">
+          <img id="gameImg" src="" alt="" class="ui small rounded image" />
+        </div>
+      </div>
+      <div id="clipZone" class="sixteen wide column transition centered">
+        <video
+          id="clipVideo"
+          src=""
+          sandbox="allow-scripts allow-presentation allow-same-origin"
+          allow="fullscreen; picture-in-picture; xr-spatial-tracking; clipboard-write"
+          preload="auto"
+          align="center"
+          muted
+        ></video>
+        <div id="clipInfo" class="transition">
+          Clip title - featuring clip game
+        </div>
+      </div>
+      <style id="customStyle"></style>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+    <script src="../API_Key.js"></script>
+    <script src="./scripts/shoutout.js"></script>
+    <script>
+      $(document).ready(() => {
+        document.dispatchEvent(evt);
+      });
+    </script>
+  </body>
+</html>

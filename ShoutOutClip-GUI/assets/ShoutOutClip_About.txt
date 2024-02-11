@@ -1,0 +1,86 @@
+# Overview:
+
+    1. Used programming languages and frameworks:
+
+        + Main script:
+            - Python 2.7.13
+
+        + Graphical User Interface (GUI):
+            - Python 2.7.13
+            - Tkinter (python framework for GUI design)
+        
+    2. Requirements:
+
+        + StreamlabsChatbot 1.02.78 (or above)
+        
+        + Python 2.7.13
+
+        + Operational System(s):
+            - Windows 10 (or above)
+        
+        + Streaming platform:
+            - Twitch (100% tested)
+        
+    3. Basic funcionalities:
+
+        + Enables automatic shoutouts with custom messages sent in chat for saved streamers
+        
+        + Displays a customizable overlay (colors and typography / font) with the streamer shouted
+
+        + Displays a random clip of the shouted streamer if the related option is enabled
+
+        + Displays basic information of the clip played (clip title and game played when the clip was saved) if the related option is enabled
+        
+        + Uses sqlite database model to manage the streamers to be shout with custom messages
+
+        + Ueses a queue for consecutive shouts instead of a command cooldown
+        
+        + Provides a group of commands to be used with the script
+
+    4. To do in future patches:
+
+        + Fix chat commands, when and if necessary. For the moment, those messages are sent only on stream chat, due to Twitch IRC
+          chat deprecation. It would be optimal if some message could be send as whispers, in order to prevent chat spam
+          with "unwanted/unnecessary" messages.
+
+        + Fix overlay breakups (if possible) due to some CORS policies imposed by OBS over browser sources (aka overlays) when
+          playing clips.
+
+        + Fix typos when found, or as by request of the script users.
+        
+============================================================================================================
+
+# Known issues/extra notes:
+
+    Below there is a list of known issues. Some of those isses are not script related and cannot be fixed.
+    Future patches of this script and dashboard application will provide fixes to issues realated ONLY to
+    script coding.
+
+    + As stated previously, due to some CORS policies imposed by OBS over browser sources (overlays), the clip may not play correctly,
+      get stuck at a certain point or even have the played sound distorted - there is not much to be done on this matter, so the only
+      fix to this is done by the user by refreshing the source and interacting with it inside OBS.
+
+    + Due to Twitch IRC chat deprecation, some of the used  IRC chat commands used may not work. If that happens, please notify the
+      developer, so a possible fix for this can be done, via replacement of the Twitch command used to a different one - if applicable.
+
+    + It can happen that one or more commands may not work. If this happens, please renew your tokens (streamer and bot) within
+       chatbot. Remember those tokens are valid for 30 days, so it's advised to renew them at least once per month inside the chatbot.
+
+    + Clicking inside the Quick help text instead of clicking in the scrollbar next to it, may cause its internal contents to change into a
+       message informing that a quick help for it was not found. This can be reverted back to it's normal by pressing "Tab" to select a
+       different GUI element and rever the text to the selected element quick help information. This sadly, due to computational
+       limitations, can't be fixed (YET).
+
+
+============================================================================================================
+
+# Changelog:
+
+    1. Beta Releases:
+        + [SLCB] KeepAlive b1.0.0:
+            - Current release
+
+    2. Alpha Releases
+
+        + [SLCB] ShoutOutClip a1.0.0:
+            - First alpha release for personal testing

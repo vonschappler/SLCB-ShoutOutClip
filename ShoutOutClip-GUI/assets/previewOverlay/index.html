@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.9.3/dist/semantic.min.css"
+    />
+    <link rel="stylesheet" href="./index.css" />
+    <title>[SLCB] ShoutOutClip Overlay</title>
+  </head>
+  <body
+    style="padding-left: 2%; padding-right: 2%; padding-top: 2%"
+    onload="showStatus()"
+  >
+    <h3 class="ui teal top attached header">Overlay Playground</h3>
+    <div class="ui attached form segment">
+      <div id="loader" class="ui dimmer">
+        <div class="ui huge text loader">Previewing changes</div>
+      </div>
+      <div class="inline field">
+        <div id="msgInfo" class="ui warning message transition visible">
+          <div id="msgHeader" class="header">Attention!</div>
+          <div id="msgContent" class="content">
+            To enable font preview in the overlay, some permissions must be
+            granted to this page. To grant the necessary permissions, click
+            <a href="#" onclick="loadFonts()">here</a>.
+          </div>
+        </div>
+      </div>
+      <div class="ui dividing header">
+        <h4>General Settings:</h4>
+      </div>
+      <div class="field">
+        <label>Streamer name to test overlay: </label>
+        <input
+          type="text"
+          value=""
+          placeholder="Enter the streamer's Twitch handle, eg. von_schappler"
+          id="streamerTag"
+        />
+      </div>
+      <div class="three fields">
+        <div class="field">
+          <label>Overlay font: </label>
+          <select
+            class="ui search selection dropdown"
+            name="textFont"
+            id="fontSelector"
+            onchange="onFontSelected()"
+          >
+            <i class="dropdown icon"></i>
+            <option value="">Select a font to preview</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Preview font: </label>
+          <div id="font-info" class="font-info">
+            <div id="font-info-full-name" class="font-info-item"></div>
+            <div id="font-info-style" class="font-info-item"></div>
+          </div>
+          <style id="font-style"></style>
+        </div>
+        <div class="field">
+          <label for="">Animation style:</label>
+          <select
+            class="ui search selection dropdown"
+            name="animation"
+            id="animSelector"
+          >
+            <i class="dropdown icon"></i>
+            <option value="">Select an animation to preview</option>
+          </select>
+        </div>
+      </div>
+      <div class="field ui checkbox">
+        <input type="checkbox" name="displayClip" id="dispClipCheck" checked />
+        <label>Display clip video with shoutout?</label>
+      </div>
+      <br />
+      <div class="field ui checkbox">
+        <input
+          type="checkbox"
+          name="displayClipInfo"
+          id="dispClipInfoCheck"
+          checked
+        />
+        <label
+          >Display clip information when the clip is displayed on
+          shoutouts?</label
+        >
+      </div>
+      <div class="ui dividing header">
+        <h4>Overlay Visual Style Settings: </h4>
+      </div>
+      <div class="ui dividing header">
+        <h5>Information Zone:</h5>
+      </div>
+      <div class="two fields">
+        <div class="field">
+          <label for="">Type top text color:</label>
+          <input
+            type="text"
+            placeholder="Enter hex color code..."
+            name="topTextColor"
+            value="#ffffff"
+            id="topTextColor"
+            onchange="$('#inputTopTextColor').val($(this).val())"
+            onfocus="$('#inputTopTextColor').show()"
+          />
+          <label class="spaced"
+            ><i class="eyedropper icon"></i> Click below to select:</label
+          >
+          <input
+            type="color"
+            value="#ffffff"
+            onchange="$('#topTextColor').val($(this).val())"
+            id="inputTopTextColor"
+          />
+        </div>
+        <div class="field">
+          <label for="">Type top background color:</label>
+          <input
+            type="text"
+            placeholder="Enter hex color code..."
+            name="topBgColor"
+            value="#16b2ab"
+            id="topBgColor"
+            onchange="$('#inputTopBgtColor').val($(this).val())"
+            onfocus="$('#inputTopBgColor').show()"
+          />
+          <label class="spaced"
+            ><i class="eyedropper icon"></i> Click below to select:</label
+          >
+          <input
+            type="color"
+            value="#16b2ab"
+            onchange="$('#topBgColor').val($(this).val())"
+            id="inputTopBgColor"
+          />
+        </div>
+      </div>
+      <div class="three fields">
+        <div class="field">
+          <label for="">Type bottom text color:</label>
+          <input
+            type="text"
+            placeholder="Enter hex color code..."
+            name="bottomTextColor"
+            value="#1b1c1d"
+            id="bottomTextColor"
+            onchange="$('#inputBottomTextColor').val($(this).val())"
+            onfocus="$('#inputBottomTextColor').show()"
+          />
+          <label class="spaced"
+            ><i class="eyedropper icon"></i> Click below to select:</label
+          >
+          <input
+            type="color"
+            value="#1b1c1d"
+            onchange="$('#bottomTextColor').val($(this).val())"
+            id="inputBottomTextColor"
+          />
+        </div>
+        <div class="field">
+          <label for="">Type bottom background color:</label>
+          <input
+            type="text"
+            placeholder="Enter hex color code..."
+            name="bottomBgColor"
+            value="#ffffff"
+            id="bottomBgColor"
+            onchange="$('#inputBottomBgColor').val($(this).val())"
+          />
+          <label class="spaced"
+            ><i class="eyedropper icon"></i> Click below to select:</label
+          >
+          <input
+            type="color"
+            value="#ffffff"
+            onchange="$('#bottomBgColor').val($(this).val())"
+            id="inputBottomBgColor"
+          />
+        </div>
+        <div class="field">
+          <label for="">Type images background color:</label>
+          <input
+            type="text"
+            value="#1b1c1d"
+            placeholder="Enter hex color code..."
+            name="imgBgColor"
+            id="imgBgColor"
+            onchange="$('#inputImgBgColor').val($(this).val())"
+          />
+          <label class="spaced"
+            ><i class="eyedropper icon"></i> Click below to select:</label
+          >
+          <input
+            type="color"
+            value="#1b1c1d"
+            onchange="$('#imgBgColor').val($(this).val())"
+            id="inputImgBgColor"
+          />
+        </div>
+      </div>
+      <div class="ui dividing header">
+        <h5>Clip Zone:</h5>
+      </div>
+      <div class="ui warning message visible">
+        <p>
+          The options below will take effect only if the the general settings
+          <strong>Display clip video with shoutout?</strong> is enabled.
+        </p>
+      </div>
+      <div class="field ui checkbox">
+        <input
+          type="checkbox"
+          name="showClipBorder"
+          id="showClipBorderCheck"
+          checked
+        />
+        <label>Display border around clip?</label>
+      </div>
+      <div class="two fields">
+        <div class="field">
+          <label for="">Type clips border color:</label>
+          <input
+            type="text"
+            value="#16b2ab"
+            placeholder="Enter hex color code..."
+            name="clipZoneBorder"
+            id="clipZoneBorder"
+            onchange="$('#inputClipZoneBorder').val($(this).val())"
+          />
+        </div>
+        <div class="field">
+          <label><i class="eyedropper icon"></i> Click below to select:</label>
+          <input
+            type="color"
+            value="#16b2ab"
+            onchange="$('#clipZoneBorder').val($(this).val())"
+            id="inputClipZoneBorder"
+          />
+        </div>
+      </div>
+      <div class="ui warning message visible">
+        <p>
+          The options below will take effect only if the the general settings
+          <strong
+            >Display clip information when the clip is displayed on
+            shoutouts?</strong
+          >
+          is enabled.
+        </p>
+      </div>
+      <div class="three fields">
+        <div class="field">
+          <label for="">Type clips information divider color:</label>
+          <input
+            type="text"
+            value="#16b2ab"
+            placeholder="Enter hex color code..."
+            name="clipInfoDivider"
+            id="clipInfoDivider"
+            onchange="$('#inputClipInfoDivider').val($(this).val())"
+          />
+          <label class="spaced"
+            ><i class="eyedropper icon"></i> Click below to select:</label
+          >
+          <input
+            type="color"
+            value="#16b2ab"
+            onchange="$('#clipInfoDivider').val($(this).val())"
+            id="inputClipInfoDivider"
+          />
+        </div>
+        <div class="field">
+          <label for="">Type clips information background color:</label>
+          <input
+            type="text"
+            value="#1b1c1d"
+            placeholder="Enter hex color code..."
+            name="clipInfoBgColor"
+            id="clipInfoBgColor"
+            onchange="$('#inputClipInfoBgColor').val($(this).val())"
+          />
+          <label class="spaced"
+            ><i class="eyedropper icon"></i> Click below to select:</label
+          >
+          <input
+            type="color"
+            value="#1b1c1d"
+            onchange="$('#clipInfoBgColor').val($(this).val())"
+            id="inputClipInfoBgColor"
+          />
+        </div>
+        <div class="field">
+          <label for="">Type clips information text color:</label>
+          <input
+            type="text"
+            value="#ffffff"
+            placeholder="Enter hex color code..."
+            name="clipInfoTextColor"
+            id="clipInfoTextColor"
+            onchange="$('#inputClipInfoTextColor').val($(this).val())"
+          />
+          <label class="spaced"
+            ><i class="eyedropper icon"></i> Click below to select:</label
+          >
+          <input
+            type="color"
+            value="#ffffff"
+            onchange="$('#clipInfoTextColor').val($(this).val())"
+            id="inputClipInfoTextColor"
+          />
+        </div>
+      </div>
+      <div class="ui divider"></div>
+      <div class="ui inline fields">
+        <div
+          class="ui teal button"
+          onclick="setStyles($('.form').form('get values'))"
+        >
+          Preview applied styles
+        </div>
+      </div>
+    </div>
+    <div class="ui bottom attached segment">
+      <div id="preview" class="ui grid transition">
+        <div class="equal height row centered">
+          <div
+            id="profileZone"
+            class="two wide column transition middle aligned floating message"
+          >
+            <img id="profileImg" src="" alt="" class="ui small rounded image" />
+          </div>
+          <div
+            id="textZone"
+            class="twelve wide column transition middle aligned"
+          >
+            <div id="streamerInfo">Follow Streamer (last paying Game)</div>
+            <div id="channelInfo">at http://twitch.tv/streamer</div>
+          </div>
+          <div id="gameZone" class="two wide column transition middle aligned">
+            <img id="gameImg" src="" alt="" class="ui small rounded image" />
+          </div>
+        </div>
+        <div id="clipZone" class="sixteen wide column transition centered">
+          <video
+            id="clipVideo"
+            src=""
+            sandbox="allow-scripts allow-presentation allow-same-origin"
+            allow="autoplay; fullscreen; picture-in-picture; xr-spatial-tracking; clipboard-write"
+            preload="auto"
+            align="center"
+            muted
+            autoplay
+          ></video>
+          <div id="overlay" class="transition">
+            Clip title - featuring clip game
+          </div>
+        </div>
+
+        <style id="previewStyle"></style>
+      </div>
+      <h3 id="info">Check your changes above...</h3>
+      <ul>
+        <li>
+          Text and images displayed are for <strong>reference only</strong>.
+          They'll be replaced by real information when the script is actively
+          running.
+        </li>
+        <li>
+          To prevent any kind of overlap sound and or animation, please preview
+          the new style applied after a previous preview has ended.
+        </li>
+        <li>
+          Every clip played has a safety timer of <strong>1 second</strong>,
+          meaning that they will stay active on the overlay for their duration
+          minus 1 second, eg. a clip with 30 secs duration will be on screen for
+          29 seconds.
+        </li>
+        <li>
+          If the option <strong>"Display clip video with shoutout"</strong> is
+          disabled, the overlay will be visible for
+          <strong>10 seconds</strong> as default.
+        </li>
+      </ul>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jscolor/2.5.1/jscolor.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.9.3/dist/semantic.min.js"></script>
+    <script src="getFontAPI.js"></script>
+    <script src="index.js"></script>
+    <script>
+      $(document).ready(() => {
+        document.dispatchEvent(evt);
+      });
+    </script>
+  </body>
+</html>

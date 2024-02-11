@@ -1,0 +1,62 @@
+[
+  {
+    "Command": "!shout",
+    "Permission": "Moderator",
+    "Info": "",
+    "Group": "[SLCB] - SHOUTOUTCLIP",
+    "Response": "$desc(Use this command to send a ShoutOut to a given Twitch account)\r\n$shoutout(shout $dummyormsg)",
+    "Cooldown": 0,
+    "UserCooldown": 0,
+    "Cost": 0,
+    "Count": 0,
+    "Usage": "A",
+    "Enabled": true,
+    "SoundFile": "",
+    "FKSoundFile": null
+  },
+  {
+    "Command": "!shoutdb",
+    "Permission": "Caster",
+    "Info": "",
+    "Group": "[SLCB] - SHOUTOUTCLIP",
+    "Response": "$desc(Use this command to open the dashboard control of the script [SLCB] - ShoutOutClip)\r\n$shoutout(gui $dummyormsg)",
+    "Cooldown": 0,
+    "UserCooldown": 0,
+    "Cost": 0,
+    "Count": 0,
+    "Usage": "A",
+    "Enabled": true,
+    "SoundFile": "",
+    "FKSoundFile": null
+  },
+  {
+    "Command": "!shoutrst",
+    "Permission": "Caster",
+    "Info": "",
+    "Group": "[SLCB] - SHOUTOUTCLIP",
+    "Response": "$desc(Use this command restart any changes made to the script while using the dashboard, after saving the changes)\r\n$shoutout(restart $dummyormsg)",
+    "Cooldown": 0,
+    "UserCooldown": 0,
+    "Cost": 0,
+    "Count": 0,
+    "Usage": "A",
+    "Enabled": true,
+    "SoundFile": "",
+    "FKSoundFile": null
+  },
+  {
+    "Command": "!shouttest",
+    "Permission": "Caster",
+    "Info": "",
+    "Group": "[SLCB] - SHOUTOUTCLIP",
+    "Response": "$desc(Use this command to test the overlay, while simulating a raid to your channel)\r\n$shoutout(test $dummyormsg)",
+    "Cooldown": 0,
+    "UserCooldown": 0,
+    "Cost": 0,
+    "Count": 0,
+    "Usage": "A",
+    "Enabled": true,
+    "SoundFile": "",
+    "FKSoundFile": null
+  }
+]
