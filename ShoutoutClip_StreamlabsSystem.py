@@ -121,7 +121,6 @@ def Execute(data):
     if data.IsChatMessage() and isEnabled:
         user = data.User
         if (user not in alreadyShout) and (user in allowedCasters) and (not scriptSettings['shoutOnJoin']):
-            alreadyShout.append(user)
             RunCommand('shout {caster}'.format(caster=user), user)
     if (data.IsRawData() and data.IsFromTwitch() and Parent.IsLive()) and isEnabled:
         rawData = data.RawData
@@ -141,7 +140,6 @@ def Tick():
         currentViewers = Parent.GetViewerList()
         for viewer in currentViewers:
             if (viewer.lower() not in alreadyShout) and (viewer.lower() in allowedCasters) and (scriptSettings['shoutOnJoin']):
-                alreadyShout.append(viewer.lower())
                 RunCommand('shout {caster}'.format(caster=viewer.lower()), viewer.lower())
     if len(shoutOutQ) > 0 and not Parent.IsOnCooldown(ScriptName, 'shout'):
         clipInfo = shoutOutQ[0]['clipInfo']
@@ -283,7 +281,7 @@ def RemovePound(caster):
     return caster.lower()
 
 def ShoutOut(caster):
-    global shoutOutQ
+    global shoutOutQ, alreadyShout
     displayName = Parent.GetDisplayName(caster)
     casterInfo = GetCasterInfo(caster)
     if (casterInfo !=None):
@@ -301,6 +299,7 @@ def ShoutOut(caster):
         "shoutMessage": shoutMessage
     }
     shoutOutQ.append(payload)
+    alreadyShout.append(caster)
     return
 
 def TestRaider():
