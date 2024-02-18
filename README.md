@@ -29,7 +29,9 @@ This script counts with two important external pieces/APIs:
 
 ## User guide:
 
-A full guide on how to use the script can be found on [the script wiki](https://github.com/vonschappler/SLCB-ShoutOutClip/wiki/User-Guide).
+If you are new to **Streamlabs Chatbot** and needs some guidelines on how to setup scripts on it, please refer to their [official documentation](https://cdn.streamlabs.com/chatbot/Documentation_Twitch.pdf).
+
+After following the instructions on how to setup the bot and how to make use of custom scripts, **import** the script and move to our complete user's guide provided on this [wiki](https://github.com/vonschappler/SLCB-ShoutOutClip/wiki/User-Guide).
 
 ## Image previews:
 
