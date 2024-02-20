@@ -15,6 +15,7 @@ let clipVideo = '';
 let clipInfo = '';
 let clipInfoText = `<%clipTitle%> - <%clipGame%>`;
 let customStyle = '';
+let shoutDuration;
 
 let defaultSettings = {
   animation: 'drop',
@@ -102,12 +103,15 @@ const connectWebsocket = () => {
         clipTitle,
         clipGame,
       };
+      const { duration } = clipInfo;
+      console.log(overlayInfo);
       document.dispatchEvent(evt);
       const overlayReady = await setOverlayVisuals({
         overlaySettings,
         overlayInfo,
+        duration,
       });
-      overlayReady && animOverlay({ overlaySettings, clipInfo });
+      overlayReady && animOverlay({ overlaySettings, shoutDuration });
     }
   };
 };
@@ -115,6 +119,7 @@ const connectWebsocket = () => {
 const setOverlayVisuals = async ({
   overlaySettings = defaultSettings,
   overlayInfo = {},
+  duration,
 }) => {
   customStyle.textContent = `
         @font-face {
@@ -154,11 +159,11 @@ const setOverlayVisuals = async ({
     overlayInfo?.casterUrl
   );
   gameImg.src = overlayInfo?.gameImage;
-  renderClip({ overlaySettings, overlayInfo });
+  renderClip({ overlaySettings, overlayInfo, duration });
   return true;
 };
 
-const renderClip = ({ overlaySettings, overlayInfo }) => {
+const renderClip = ({ overlaySettings, overlayInfo, duration }) => {
   $(clipInfo).css({
     color: overlaySettings.clipInfoTextColor,
     'background-color': overlaySettings.clipInfoBgColor,
@@ -170,19 +175,24 @@ const renderClip = ({ overlaySettings, overlayInfo }) => {
     .replace('<%clipTitle%>', overlayInfo.clipTitle)
     .replace('<%clipGame%>', overlayInfo?.clipGame);
   overlaySettings.displayClip
+    ? (shoutDuration = duration)
+    : (shoutDuration = 10);
+  overlaySettings.displayClip
     ? clipZone.classList.remove('hidden')
     : clipZone.classList.add('hidden');
-  overlaySettings.displayClipInfo
+  overlaySettings.displayClipInfo && overlaySettings.displayClip
     ? clipInfo.classList.remove('hidden')
     : clipInfo.classList.add('hidden');
+  console.log(clipZone.classList.value);
 };
 
-const animOverlay = ({ clipInfo, overlaySettings = defaultStyle }) => {
-  const duration = clipInfo?.duration ?? 10;
+const animOverlay = ({ overlaySettings = defaultStyle, shoutDuration }) => {
+  const duration = shoutDuration ?? 10;
   const animIn = `${overlaySettings.animation} in`.toLowerCase();
   const animOut = `${overlaySettings.animation} out.`.toLowerCase();
-  if (!clipInfo?.duration) clipZone.classList.add('hidden');
-  else clipZone.classList.remove('hidden');
+  duration === 10
+    ? clipZone.classList.add('hidden')
+    : clipZone.classList.remove('hidden');
   document.dispatchEvent(evt);
   clipVideo.play();
   clipVideo.muted = false;

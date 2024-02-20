@@ -187,11 +187,13 @@ def Parse(parseString, userid, username, targetid, targetname, message):
 # Functions
 #---------------------------------------
 def RunCommand(command, user):
-    cmdOptions = ['shout', 'gui', 'restart', 'test']
+    cmdOptions = ['shout_clip', 'shout', 'gui', 'restart', 'test']
     args = command.split(' ')
     toDo = args[0].lower()
     if toDo in cmdOptions:
-        if toDo == cmdOptions[0]:
+        if toDo == cmdOptions[0] or toDo == cmdOptions[1]:
+            if (toDo == cmdOptions[1]):
+                overlaySettings['displayClip'] = False
             try:
                 caster = RemovePound(args[1])
                 ShoutOut(caster)
