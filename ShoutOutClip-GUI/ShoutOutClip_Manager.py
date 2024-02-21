@@ -187,16 +187,15 @@ def cancelEdit(frame):
     return
 
 def changeText(frame):
-    global casterSelector, casterShoutEnableSelector, variables, current
-    current = casterSelector.current() + 1
+    global casterSelector, casterShoutEnableSelector, variables
     frame['text'] = ' Editing caster options for {caster}: '.format(caster=variables[2].get())
-    
-    variables[3].set(castersData[current][0])
-    variables[4].set(castersData[current][1])
-    variables[5].set(castersData[current][2])
+    caster = fn.getCaster(db, variables[2].get())
+    variables[3].set(caster[1])
+    variables[4].set(caster[2])
+    variables[5].set(caster[3])
     casterSelector.set(variables[3].get())
     casterShoutEnableSelector.set(enableOptions[variables[5].get()])
-    return current
+    return caster
 
 def getNewData(var):
     data = [var[0].get(), var[1].get().encode('utf-8')]

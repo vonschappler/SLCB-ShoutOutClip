@@ -160,6 +160,12 @@ def setVolume(label, var, *args):
     label['text'] = '{:.0f}%'.format(var.get())
     return var.get()
 
+def getCaster(db, caster):
+    results = db.getCaster(caster)
+    msg = results[1]
+    printLog(msg)
+    return results[0]
+
 def getCasters(db):
     results = db.getCasters()
     if len(results[0]) > 0:
