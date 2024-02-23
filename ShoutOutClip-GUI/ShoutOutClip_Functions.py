@@ -182,14 +182,13 @@ def addOne(db, cb1, mode, data, cb2):
     printLog(msg)
     cb2(mode)
     return
-
+    
 def updateDefaultMessage(message):
     global castersDB
     msg = castersDB.updateCaster('any', ['any', message, 1])
     printLog(msg)
     return castersDB
 
-    
 def updateOne(db, cb1, mode, data, cb2):
     data = cb1(data)
     msg = db.updateCaster(data[0], data[1:])
@@ -212,8 +211,6 @@ def unselect(root, *args):
 def dbDisconnect():
     castersDB.conn.close()
     return
-
-helpText = readJson(helpFile)
 
 def changeHelp(e, root, textZones, *args):
     try:

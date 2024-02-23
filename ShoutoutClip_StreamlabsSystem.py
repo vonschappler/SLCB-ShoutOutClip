@@ -161,6 +161,8 @@ def Tick():
             if (caster in allowedCasters):
                 pos = allowedCasters.index(caster)
                 shoutMessage = castersDBList[pos][1]
+                if (shoutMessage == 'DEFAULT'):
+                    shoutMessage = castersDBList[0][1]    
                 viewercount = None
             else:
                 shoutMessage = castersDBList[0][1]
@@ -187,6 +189,7 @@ def Parse(parseString, userid, username, targetid, targetname, message):
 # Functions
 #---------------------------------------
 def RunCommand(command, user):
+    global overlaySettings
     cmdOptions = ['shout_clip', 'shout', 'gui', 'restart', 'test']
     args = command.split(' ')
     toDo = args[0].lower()
@@ -194,6 +197,8 @@ def RunCommand(command, user):
         if toDo == cmdOptions[0] or toDo == cmdOptions[1]:
             if (toDo == cmdOptions[1]):
                 overlaySettings['displayClip'] = False
+            else:
+                overlaySettings['displayClip'] = True
             try:
                 caster = RemovePound(args[1])
                 ShoutOut(caster)
@@ -202,11 +207,11 @@ def RunCommand(command, user):
                 msg = '({script} - {version}) - Unable to send a shoutout - the command needs a valid Twitch handle in order to emit a shoutout'
                 msg = msg.format(script=ScriptName, version=Version)
                 SendInfo('action (/me)', msg)
-        if toDo == cmdOptions[1]:
-            OpenGUI()
         if toDo == cmdOptions[2]:
-            ReloadSettings()
+            OpenGUI()
         if toDo == cmdOptions[3]:
+            ReloadSettings()
+        if toDo == cmdOptions[4]:
             TestRaider()
     return
 

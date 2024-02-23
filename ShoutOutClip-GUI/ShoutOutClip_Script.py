@@ -233,5 +233,5 @@ def getSettings(variablesArray):
         "shoutRaiderMessage": variablesArray[6].get(),
         "saveRaider": variablesArray[7].get(),
     }
-    fn.updateDefaultMessage(settingsData['shoutMessage'])
+    fn.updateDefaultMessage(settingsData['shoutMessage'].encode('utf-8'))
     return settingsData

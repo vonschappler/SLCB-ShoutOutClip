@@ -1,10 +1,10 @@
 ﻿{
+  "dbFileName": "ShoutOutClip_Database.sqlite", 
+  "dbFolder": "ShoutOutClip-Database", 
   "dbColumns": [
     "caster", 
     "customMessage", 
     "allow"
   ], 
-  "dbTable": "castersSettings", 
-  "dbFolder": "ShoutOutClip-Database", 
-  "dbFileName": "ShoutOutClip_Database.sqlite"
+  "dbTable": "castersSettings"
 }

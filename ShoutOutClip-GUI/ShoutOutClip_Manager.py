@@ -8,7 +8,7 @@ castersList = []
 castersData = fn.getCasters(db)
 for data in castersData:
     castersList.append(data[0])
-castersList.sort()    
+castersList.sort()
 enableOptions = ['Temporarily Disabled', 'Enabled']
 
 def createTab(mainInt):
@@ -71,14 +71,14 @@ def addComponents(place):
 def addCaster(canvas):
     frame = tk.Frame(canvas, takefocus=0)
     frame.grid(row=1, column=0, pady=[0,10], padx=5, sticky=tk.W+tk.E)
-    
+
     casterAdd = ttk.LabelFrame(frame, text=' Add new caster: ', width=0)
     casterAdd.grid(row=0, column=0, pady=5, sticky=tk.W+tk.E)
     casterAdd.config(border=1, relief=tk.SOLID)
     casterAdd.columnconfigure(0, weight=0)
     casterAdd.columnconfigure(1, weight=1)
     casterAdd.columnconfigure(2, weight=1)
-    
+
     ttk.Label(casterAdd, text='Caster\'s Twitch username:').grid(row=0, column=0, sticky=tk.E+tk.W, pady=5)
     casterUsernameEntry = ttk.Entry(casterAdd, font=('Calibri', 12), name='casterName', textvar=variables[0])
     casterUsernameEntry.grid(row=0, column=1, sticky=tk.E+tk.W, pady=5, padx=[10,0], columnspan=2, ipady=2)
@@ -87,7 +87,7 @@ def addCaster(canvas):
     ttk.Label(casterAdd, text='Caster\'s custom message:                                                ').grid(row=1, column=0, sticky=tk.E+tk.W, pady=5, columnspan=2)
     casterMessageEntry = ttk.Entry(casterAdd, font=('Calibri', 12), name='casterMessage', textvar=variables[1])
     casterMessageEntry.grid(row=2, column=0, columnspan=3, sticky=tk.E+tk.W, pady=5, ipady=2)
-    
+
     saveCasterBtn = ttk.Button(casterAdd, text='Save caster', name='addCaster')
     saveCasterBtn.grid(row=3, column=1, pady=[5,0], sticky=tk.W+tk.E, padx=[0,5])
     saveCasterBtn.configure(command=lambda db=db, cb1=getNewData, var=variables, mode='save', cb2=updateList: fn.addOne(db, cb1, mode, var, cb2))
@@ -95,7 +95,6 @@ def addCaster(canvas):
     cancelCasterBtn = ttk.Button(casterAdd, text='Discard Changes', name='cancelCaster')
     cancelCasterBtn.grid(row=3, column=2 , pady=[10,5], sticky=tk.W+tk.E, padx=[5,5])
     cancelCasterBtn.configure(command=cancelSave)
-    
     return frame
 
 def edtCaster(canvas):
@@ -154,7 +153,6 @@ def addHelp(tab):
     tabHelpText['yscrollcommand'] = scrollY.set
     return tabHelpText
 
-
 def cancelSave():
     global variables
     variables[0].set("")
@@ -199,13 +197,10 @@ def changeText(frame):
 
 def getNewData(var):
     data = [var[0].get(), var[1].get().encode('utf-8')]
-    print(str(data))
     return data
 
 def getUpdateData(var):
     global current, casterShoutEnableSelector
     var[5].set(casterShoutEnableSelector.current())
     data = [var[2].get(), var[3].get(), var[4].get().encode(encoding='utf-8'), var[5].get()]
-    print(data)
     return data
-    

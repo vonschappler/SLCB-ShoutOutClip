@@ -170,7 +170,9 @@ const renderClip = ({ overlaySettings, overlayInfo, duration }) => {
     'border-color': overlaySettings.clipInfoDivider,
   });
   clipVideo.src = overlayInfo?.clipUrl;
-  clipVideo.volume = overlaySettings.volume / 100;
+  clipVideo.volume = overlaySettings.displayClip
+    ? overlaySettings.volume / 100
+    : 0;
   clipInfo.innerHTML = clipInfoText
     .replace('<%clipTitle%>', overlayInfo.clipTitle)
     .replace('<%clipGame%>', overlayInfo?.clipGame);
