@@ -6,7 +6,7 @@ global logFolder, logFile
 class Logger():
     def __init__(self, mode=None):
         self.scriptName = '[SLCB] ShoutOutClip'
-        self.version = 'b1.5.0'
+        self.version = 'b1.6.0'
         if mode == 'dashboard':
             self.logFolder = os.path.realpath(os.path.join(os.path.dirname(__file__), '..\ShoutOutClip-Logs\Dashboard'))
         elif mode == 'script' or mode == None:
