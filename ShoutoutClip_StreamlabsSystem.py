@@ -118,15 +118,21 @@ def ScriptToggled(state):
 #---------------------------------------
 def Execute(data):
     global alreadyShout, allowedCasters, wasRaided
-    if data.IsChatMessage() and isEnabled:
+    if data.IsChatMessage() and isEnabled and scriptSettings['shoutCaster']:
         user = data.User
         if (user not in alreadyShout) and (user in allowedCasters) and (not scriptSettings['shoutOnJoin']):
-            RunCommand('shout_clip {caster}'.format(caster=user), user)
+            if overlaySettings['displayClip']:
+                RunCommand('shout_clip {caster}'.format(caster=user), user)
+            else:
+                RunCommand('shout {caster}'.format(caster=user), user)
     if (data.IsRawData() and data.IsFromTwitch() and Parent.IsLive()) and isEnabled:
         rawData = data.RawData
         raiderData = CheckRaider(rawData)
         if (raiderData[0] and scriptSettings['shoutRaider']):
-            RunCommand('shout_clip {caster}'.format(caster=raiderData[1]), raiderData[1])
+            if overlaySettings['displayClip']:
+                RunCommand('shout_clip {caster}'.format(caster=raiderData[1]), raiderData[1])
+            else:
+                RunCommand('shout {caster}'.format(caster=raiderData[1]), raiderData[1])
             if ((raiderData[1] not in castersDBList) or (raiderData[1].lower() not in castersDBList) and scriptSettings['saveRaider']):
                 castersDBList.addCaster(raiderData[1].lower(), 'DEFAULT')
     return
@@ -136,12 +142,15 @@ def Execute(data):
 #---------------------------------------
 def Tick():
     global allowedCasters, shoutOutQ, castersDBList, alreadyShout, wasRaided, viewerCount
-    if isEnabled:
+    if isEnabled and scriptSettings['shoutCaster']:
         currentViewers = Parent.GetViewerList()
         for viewer in currentViewers:
             if (viewer.lower() not in alreadyShout) and (viewer.lower() in allowedCasters) and (scriptSettings['shoutOnJoin']):
-                RunCommand('shout_clip {caster}'.format(caster=viewer.lower()), viewer.lower())
-    if len(shoutOutQ) > 0 and not Parent.IsOnCooldown(ScriptName, 'shout'):
+                if overlaySettings['displayClip']:
+                    RunCommand('shout_clip {caster}'.format(caster=viewer.lower()), viewer.lower())
+                else:
+                    RunCommand('shout {caster}'.format(caster=viewer.lower()), viewer.lower())
+    if len(shoutOutQ) > 0 and not Parent.IsOnCooldown(ScriptName, 'shout') and scriptSettings['shoutCaster']:
         clipInfo = shoutOutQ[0]['clipInfo']
         caster = shoutOutQ[0]['casterName'].lower()
         casterName = shoutOutQ[0]['casterName']
@@ -315,7 +324,10 @@ def TestRaider():
     data = "@msg-id=raid;msg-param-displayName="+ Parent.GetChannelName() +";msg-param-viewerCount=" + str(Parent.GetRandom(minRaiders, minRaiders + 100)) + "; :tmi.twitch.tv USERNOTICE #" + Parent.GetChannelName()
     raiderData = CheckRaider(data)
     if (raiderData[0]):
-        RunCommand('shout_clip {caster}'.format(caster=raiderData[1]), raiderData[1])
+        if overlaySettings['displayClip']:
+            RunCommand('shout_clip {caster}'.format(caster=raiderData[1]), raiderData[1])
+        else:
+            RunCommand('shout {caster}'.format(caster=raiderData[1]), raiderData[1])
     return
     
 def CheckRaider(data):
@@ -384,5 +396,8 @@ def OpenFixObs():
 
 def TestOverlay():
     caster = Parent.GetChannelName()
-    RunCommand('shout_clip {caster}'.format(caster=caster), caster)
+    if overlaySettings['displayClip']:
+        RunCommand('shout_clip {caster}'.format(caster=caster), caster)
+    else:
+        RunCommand('shout {caster}'.format(caster=caster), caster)
     return
