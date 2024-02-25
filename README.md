@@ -72,9 +72,27 @@ After following the instructions on how to setup the bot and how to make use of 
 
 ## Changelog:
 
+- [Version beta-1.6.0](https://github.com/vonschappler/SLCB-ShoutOutClip/releases/tag/beta-1.6.0)
+
+  - Added missing conditionals to prevent automatic shoutouts when the related option is disabled
+
+- [Version beta-1.5.0](https://github.com/vonschappler/SLCB-ShoutOutClip/releases/tag/beta-1.5.0)
+
+  - Fixed an issue that was causing the !shout command not to display a clip even with the correct settings enabled
+  - Fixed an issue where using some commands was causing the dashboard to open
+
+- [Version beta-1.4.0](https://github.com/vonschappler/SLCB-ShoutOutClip/releases/tag/beta-1.4.0)
+
+  - Fixed an issue where it was causing the selected caster to edit not being displayed correctly
+
+- [Version beta-1.3.0](https://github.com/vonschappler/SLCB-ShoutOutClip/releases/tag/beta-1.3.0)
+
+  - Fixed an issue from where the clip was still being displayed when the related option to not display clip was unchecked
+  - Added a new command to allow quick shoutouts without displaying a clip
+
 - [Version beta-1.2.0](https://github.com/vonschappler/SLCB-ShoutOutClip/releases/tag/beta-1.2.0)
 
-  - Fixed an issue which caused saved casters to be shout out twice when they also raid a channel.
+  - Fixed an issue which caused saved casters to be shout out twice when they also raid a channel
 
 - [Version beta-1.1.0](https://github.com/vonschappler/SLCB-ShoutOutClip/releases/tag/beta-1.1.0)
 
