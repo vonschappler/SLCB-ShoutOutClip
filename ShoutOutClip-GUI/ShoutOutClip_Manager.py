@@ -9,6 +9,8 @@ castersData = fn.getCasters(db)
 for data in castersData:
     castersList.append(data[0])
 castersList.sort()
+anyPos = castersList.index('any')
+castersList.pop(anyPos)
 enableOptions = ['Temporarily Disabled', 'Enabled']
 
 def createTab(mainInt):
@@ -110,7 +112,7 @@ def edtCaster(canvas):
     casterEdit.columnconfigure(1, weight=1)
     
     ttk.Label(casterEdit, text='Select a caster to edit:').grid(row=0, column=0, pady=5, sticky=tk.E + tk.W)
-    casterSelector = ttk.Combobox(casterEdit, values=castersList[1:], state='readonly', name='casterSelector', textvar=variables[2])
+    casterSelector = ttk.Combobox(casterEdit, values=castersList, state='readonly', name='casterSelector', textvar=variables[2])
     casterSelector.bind('<<ComboboxSelected>>', lambda e, frame=casterEdit: changeText(frame))
     casterSelector.grid(row=0, column=1, sticky=tk.E+tk.W, pady=5, padx=[10, 0], columnspan=2, ipady=2)
     
@@ -171,7 +173,9 @@ def updateList(mode):
     for data in castersData:
         castersList.append(data[0])
     castersList.sort()
-    casterSelector.config(values=castersList[1:])
+    anyPos = castersList.index('any')
+    castersList.pop(anyPos)
+    casterSelector.config(values=castersList)
     return castersData
 
 def cancelEdit(frame):

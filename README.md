@@ -72,6 +72,15 @@ After following the instructions on how to setup the bot and how to make use of 
 
 ## Changelog:
 
+- [Version v1.0.0](https://github.com/vonschappler/SLCB-ShoutOutClip/releases/tag/v-1.0.0)
+
+  - First official release
+  - Fixed an issue from which the Casters list was not being properly displayed:
+    - In case a caster with a Twitch handle would be sorted before the default entry on the database, the "any" entry was displayed instead of it.
+  - Fixed an issue on the overlay playground:
+    - Editing manually some fields would not update corresponding information correctly
+  - Updated the About section of the dashboard in order to reflect the official changelog for the script
+
 - [Version beta-1.6.0](https://github.com/vonschappler/SLCB-ShoutOutClip/releases/tag/beta-1.6.0)
 
   - Added missing conditionals to prevent automatic shoutouts when the related option is disabled
@@ -87,7 +96,7 @@ After following the instructions on how to setup the bot and how to make use of 
 
 - [Version beta-1.3.0](https://github.com/vonschappler/SLCB-ShoutOutClip/releases/tag/beta-1.3.0)
 
-  - Fixed an issue from where the clip was still being displayed when the related option to not display clip was unchecked
+  - Fixed an issue from where the clip was still being displayed when the related option is disabled
   - Added a new command to allow quick shoutouts without displaying a clip
 
 - [Version beta-1.2.0](https://github.com/vonschappler/SLCB-ShoutOutClip/releases/tag/beta-1.2.0)
